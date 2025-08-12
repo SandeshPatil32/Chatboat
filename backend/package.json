@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^17.2.0",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
+    "http": "^0.0.1-security",
     "mongoose": "^8.16.3",
-    "mongose": "^0.0.2-security"
+    "mongose": "^0.0.2-security",
+    "socket.io": "^4.8.1"
   }
 }

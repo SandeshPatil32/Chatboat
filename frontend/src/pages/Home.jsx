@@ -15,16 +15,9 @@ function Home() {
             a self-improved find the answer to their queries from this data.
             That can work as a SaaS or on-prem tool.
           </p>
-          <div className="flex justify-center md:justify-start">
-            <input
-              type="text"
-              placeholder="Ask something…"
-              className="border border-gray-300 rounded-2xl py-2 px-4 w-full md:w-3/4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
           <div className="pt-4">
             <Link to="/chat" className="bg-blue-600 text-white rounded-2xl py-2 px-20 hover:bg-blue-700 transition-colors cursor-pointer">
-              Get Started
+              Start Chat...
             </Link>
           </div>
         </div>

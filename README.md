@@ -1,1 +1,1 @@
-chatBoat web app. Used to provide information to peoples.
+chatWeb for users with strong security.
