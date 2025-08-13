@@ -9,7 +9,7 @@ function ChatUI() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [userId] = useState(Math.random().toString(36));
-
+  
   useEffect(() => {
     socket.on("chatMessage", (msg) => {
       setChat((prev) => [
@@ -36,7 +36,7 @@ function ChatUI() {
   return (
     <div className="min-h-screen bg-gray-100 p-6 flex justify-center">
       <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-6">
-        <h1 className="text-3xl font-bold text-purple-600 text-center mb-6">
+        <h1 className="text-3xl font-bold text-blue-500 text-center mb-6">
           Chat App
         </h1>
         <div className="h-96 overflow-y-auto mb-4 p-2 border border-gray-200 rounded-lg bg-gray-50">
@@ -56,14 +56,14 @@ function ChatUI() {
         </div>
         <form onSubmit={sendMessage} className="flex space-x-2">
           <input
-            className="flex-1 border-2 border-purple-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            className="flex-1 border-2 border-blue-500 rounded-lg p-2 focus:outline-none"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type a message..."
           />
           <button
             type="submit"
-            className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50"
+            className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 hover:cursor-pointer transition-colors disabled:opacity-50"
             disabled={!message.trim()}
           >
             Send
@@ -71,7 +71,7 @@ function ChatUI() {
         </form>
         <p className="text-center text-sm text-gray-500 mt-4">
           Back to{" "}
-          <Link to="/" className="text-purple-600 hover:underline">
+          <Link to="/" className="text-cyan-800 hover:underline">
             Home
           </Link>
         </p>
