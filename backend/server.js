@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
+const mongoose = require("mongoose");
+
 
 const app = express();
 const server = http.createServer(app);
@@ -11,26 +13,46 @@ app.use(express.json());
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
     methods: ["GET", "POST"],
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("User connected:", socket.id);
+io.on("connection", (user) => {
+  console.log("User connected:", user.id);
 
-  socket.on("chatMessage", (msg) => {
-    console.log(`message from ${socket.id}:`, msg);
+  user.on("chatMessage", (msg) => {
+   console.log(`message from ${user.id}:`, msg);
     io.emit("chatMessage", msg);
   });
 
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
+  user.on("disconnect", () => {
+    console.log("User disconnected:", user.id);
   });
 });
 
-app.get("/chat", (req, res) => {
-  res.send("Socket.IO + MERN Chat Backend is running!");
+// for database ---------------------------
+
+mongoose
+  .connect("mongodb+srv://Root:Root@tutorial.jbkxbnp.mongodb.net/webApp", {})
+  .then(() => console.log("mongodb connected"));
+
+const NoteSchema = new mongoose.Schema({
+  userName: String,
+  email: String, 
+  password: Number,
+});
+const sign = mongoose.model("webApp", NoteSchema);
+
+app.post("/save", async (req, res) => {
+  const { userName, email, password } = req.body;
+
+  try {
+    const sign_data = new sign({ userName, email, password });
+    await sign_data.save();
+    res.json({ message: "Data save" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to save" });
+  }
 });
 
 const PORT = 5000;
