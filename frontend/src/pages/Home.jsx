@@ -10,11 +10,12 @@ function Home() {
             The conversational AI assistant enhances the technology's
             information base.
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600">
             Intellesphere develops AI-based applications that help the people of
             a self-improved find the answer to their queries from this data.
             That can work as a SaaS or on-prem tool.
           </p>
+          <b className="text-red-600 ">Start chat without registration...</b>
           <div className="pt-4">
             <Link to="/chat" className="bg-blue-600 text-white rounded-2xl py-2 px-20 hover:bg-blue-700 transition-colors cursor-pointer">
               Start Chat...
