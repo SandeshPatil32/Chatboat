@@ -21,7 +21,10 @@ function Sign() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/save", form);
+      const response = await axios.post(
+        "http://localhost:5000/save",
+        form
+      );
       alert(response.data.message);
       setForm({ userName: "", email: "", password: "" });
     } catch (error) {
