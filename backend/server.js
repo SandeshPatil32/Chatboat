@@ -5,7 +5,6 @@ const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const bodyParser = require("body-parser");
 const app = express();
 const server = http.createServer(app);
 require("dotenv").config();
@@ -78,7 +77,7 @@ app.post("/login", async (req, res) => {
     const token = jwt.sign(
       { id: user._id, userName: user.userName },
       JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "20M" }
     );
 
     res.json({ token });

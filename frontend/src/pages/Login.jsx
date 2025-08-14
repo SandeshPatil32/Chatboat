@@ -14,6 +14,11 @@ function Login() {
   };
 
   const submitData = async () => {
+        if(!form.userName || !form.password) {
+          alert("Username and Password required");
+          return;
+        }
+
     try {
       const res = await axios.post("http://localhost:5000/login", form);
       localStorage.setItem("token", res.data.token);
