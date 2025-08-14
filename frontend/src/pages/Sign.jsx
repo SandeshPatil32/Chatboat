@@ -15,17 +15,18 @@ function Sign() {
   };
 
   const submitForm = async () => {
+    if (!form.userName || !form.password) {
+      alert("Username and Password required");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:5000/save", form);
-      console.log("Response from backend", response.data);
-
-      setForm({
-        userName: '',
-        email: '',
-        password: '',
-      });
+      alert(response.data.message);
+      setForm({ userName: "", email: "", password: "" });
     } catch (error) {
       console.log("Axios error", error);
+      alert("Signup failed");
     }
   };
 
@@ -35,7 +36,7 @@ function Sign() {
         Sign in for up to date
       </h1>
       <div className="space-y-4">
-        <form>
+        <div>
           <label
             htmlFor="userName"
             className="block text-sm font-medium text-gray-700"
@@ -45,11 +46,12 @@ function Sign() {
           <input
             type="text"
             name="userName"
-            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2"
             placeholder="Enter your name"
             onChange={handleChange}
+            value={form.userName}
           />
-        </form>
+        </div>
         <div>
           <label
             htmlFor="email"
@@ -59,11 +61,11 @@ function Sign() {
           </label>
           <input
             type="email"
-            id="email"
             name="email"
-            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2"
             placeholder="Enter your email"
             onChange={handleChange}
+            value={form.email}
           />
         </div>
         <div>
@@ -75,21 +77,22 @@ function Sign() {
           </label>
           <input
             type="password"
-            id="password"
             name="password"
-            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2"
             placeholder="Enter your password"
             onChange={handleChange}
+            value={form.password}
           />
         </div>
         <button
-          type="submit"
-          className="w-full bg-blue-500 p-2 rounded-2xl text-white font-medium hover:bg-blue-600 transition-colors hover:cursor-pointer" onClick={submitForm}
-        onChange={handleChange} >
+          type="button"
+          className="w-full bg-blue-500 p-2 rounded-2xl text-white font-medium hover:bg-blue-600"
+          onClick={submitForm}
+        >
           Sign Up
         </button>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Already have an account?
+          Already have an account?{" "}
           <Link to="/login" className="text-blue-600 hover:underline">
             Log in
           </Link>

@@ -1,8 +1,28 @@
 import "../App.css";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import React, { useState } from "react";
+import axios from "axios";
 
-function Sign() {
+function Login() {
+  const [form, setForm] = useState({
+    userName: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const submitData = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/login", form);
+      localStorage.setItem("token", res.data.token);
+      alert("Login successful ✅");
+    } catch (err) {
+      alert(err.response?.data?.error || "Login failed ❌");
+    }
+  };
+
   return (
     <div className="bg-white max-w-md mx-auto shadow-2xl p-9 mb-10 rounded-lg mt-10">
       <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">
@@ -11,17 +31,18 @@ function Sign() {
       <div className="space-y-4">
         <div>
           <label
-            htmlFor="name"
+            htmlFor="Username"
             className="block text-sm font-medium text-gray-700"
           >
-            Name:
+            Username:
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            name="userName"
+            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2"
             placeholder="Enter your name"
+            onChange={handleChange}
+            value={form.userName}
           />
         </div>
         <div>
@@ -33,20 +54,22 @@ function Sign() {
           </label>
           <input
             type="password"
-            id="password"
             name="password"
-            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 block w-full border-2 border-blue-600 rounded-md p-2"
             placeholder="Enter your password"
+            onChange={handleChange}
+            value={form.password}
           />
         </div>
         <button
-          type="submit"
-          className="w-full bg-blue-500 p-2 rounded-2xl text-white font-medium hover:bg-blue-600 transition-colors hover:cursor-pointer"
+          type="button"
+          className="w-full bg-blue-500 p-2 rounded-2xl text-white font-medium hover:bg-blue-600"
+          onClick={submitData}
         >
           Login
         </button>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Create Account?
+          Create Account?{" "}
           <Link to="/sign" className="text-blue-600 hover:underline">
             create
           </Link>
@@ -56,4 +79,4 @@ function Sign() {
   );
 }
 
-export default Sign;
+export default Login;
