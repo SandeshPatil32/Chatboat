@@ -5,6 +5,7 @@ const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { type } = require("os");
 const app = express();
 const server = http.createServer(app);
 require("dotenv").config();
@@ -43,10 +44,34 @@ const sign_Schema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
 });
+
 const User = mongoose.model("User", sign_Schema);
+
+const contact_Schema = new mongoose.Schema({
+  name: {type: String, required: true},
+  email: {type: String, required: true},
+  phone: {type: Number},
+  message: {type: String, require: true}
+})
+
+const Contact = mongoose.model("Contact", contact_Schema);
 
 // ✅ Secret Key
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key"; 
+
+// ✅ Contact form
+app.post("/contact", async (req, res) => {
+      const {name, email, phone, message} = req.body;
+  try{
+    const contact_data = new Contact ({ name, email, phone, message});
+    await contact_data.save();
+    res.json({ message: "Form Submitted"});
+  } catch(error){
+    console.log("Error found", error);
+    res.status(500).json({error: "Failed to send"});
+  }
+}) 
+
 
 // ✅ Signup Route
 app.post("/save", async (req, res) => {
@@ -86,7 +111,6 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Login failed" });
   }
 });
-
 
 const PORT = 5000;
 server.listen(PORT, () => {

@@ -4,50 +4,36 @@ import { useState } from "react";
 import { CgAsterisk } from "react-icons/cg";
 import { RxReload } from "react-icons/rx";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+const [form, setForm] = useState({
+  name: "",
+  email: "",
+  phone: "",
+  message: ""
+});
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+const handleChange = (e) => {
+setForm({ ...form, [e.target.name]: e.target.value});
+}
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const submitForm = async () => {
+  if (!form.name || !form.email || !form.message) {
+    alert("* field required");
+    return;
+  } 
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+  try{
+    const response = await axios.post("http://localhost:5000/contact",form);
+    alert(response.data.message);
+    setForm({name:"",email: "",phone:"", message:""});
+  } catch(error) {
+    console.log("Axios error:",error);
+    alert("contact information failed")
+  }
+};
 
-    const result = await res.json();
-    if (!formData.name || !formData.email || !formData.message) {
-      alert("Asterisk Fields required");
-      return;
-    }
-    if (res.ok) {
-      alert(" Message sent successfully!");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    } else {
-      alert("Failed: " + result.error);
-    }
-  };
 
   return (
       <section id="contact" className="bg-gray-50 py-20 px-6">
@@ -61,19 +47,18 @@ function ContactPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Left: Form */}
-            <form
-              onSubmit={handleSubmit}
+            <div
               className="bg-white p-8 rounded-2xl shadow-lg space-y-6"
             >
               <div>
-                <label className="block mb-2 font-semibold text-gray-700">
+                <label className="block mb-2 font-semibold text-gray-700" htmlFor="name">
                   <span className="inline-block">Name</span>
                   <span className="ml-1">*</span>
                 </label>
 
                 <input
                   onChange={handleChange}
-                  value={formData.name}
+                  value={form.name}
                   name="name"
                   type="text"
                   placeholder="Your Name"
@@ -81,13 +66,13 @@ function ContactPage() {
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold text-gray-700">
+                <label className="block mb-2 font-semibold text-gray-700" htmlFor="email">
                   <span className="inline-block">Email</span>
                   <span className="ml-1">*</span>
                 </label>
                 <input
                   onChange={handleChange}
-                  value={formData.email}
+                  value={form.email}
                   name="email"
                   type="email"
                   placeholder="you@example.com"
@@ -95,12 +80,12 @@ function ContactPage() {
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold text-gray-700">
+                <label className="block mb-2 font-semibold text-gray-700" htmlFor="phone">
                   Phone No.
                 </label>
                 <input
                   onChange={handleChange}
-                  value={formData.phone}
+                  value={form.phone}
                   name="phone"
                   type="number"
                   placeholder="0123456789"
@@ -108,13 +93,13 @@ function ContactPage() {
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold text-gray-700">
+                <label className="block mb-2 font-semibold text-gray-700" htmlFor="message">
                   <span className="inline-block">Message</span>
                   <span className="ml-1">*</span>
                 </label>
                 <textarea
                   onChange={handleChange}
-                  value={formData.message}
+                  value={form.message}
                   name="message"
                   rows={5}
                   placeholder="Why are you contacting me?"
@@ -124,10 +109,10 @@ function ContactPage() {
               <button
                 type="submit"
                 className="bg-blue-700 hover:bg-blue-800  hover:cursor-pointer text-white px-6 py-3 rounded-lg shadow-md transition"
-              >
+                onClick={submitForm} >
                 Send Message
               </button>
-            </form>
+            </div>
 
             {/* Right: Info */}
             <div className="space-y-6 text-gray-700">
