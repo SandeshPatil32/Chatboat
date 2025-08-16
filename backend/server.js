@@ -18,24 +18,24 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-// ✅ Routes
+// Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 
-// ✅ Socket.IO
+// Socket.IO
 const io = new Server(server, {
   cors: {
     methods: ["GET", "POST"],
   },
 });
 
-// Pass socket to handler
+// For Socket Handle
 chatSocket(io);
 
-// ✅ MongoDB Connection
+// For MongoDB Connection
 connectDB();
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () =>
-  console.log(`🚀 Server running on http://localhost:${PORT}`)
+  console.log(`Server running on http://localhost:${PORT}`)
 );
