@@ -2,36 +2,44 @@ import "../App.css";
 
 function About() {
   return (
-    <div className="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl mb-4">
-            About the Tool
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            About The Tool
           </h1>
-          <p className="text-lg text-gray-800 max-w-2xl mx-auto">
-            This project is a chatbot I built that can answer questions people
-            ask, just like how a real person would help you. It uses artificial
-            intelligence to understand what someone is asking and tries to give
-            helpful and clear answers. You can ask it about different topics,
-            and it’s good for things like customer support or just finding
-            information quickly. The chatbot is easy to use and gives quick
-            answers, making it useful for anyone who wants fast, friendly help
-            without waiting for a real person.
+          <p className="font-medium max-w-2xl mx-auto">
+            Our chat platform project is designed to provide a seamless,
+            real-time communication experience without the need for user
+            registration. By simply entering a room code, multiple participants
+            can connect instantly and start engaging in conversation.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="flex justify-center">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="md:w-1/2">
+            <p className="text-lg mb-6">
+              Built with scalability and simplicity in mind, the system supports
+              multiple chat rooms where users can interact simultaneously,
+              making it ideal for group discussions, team collaboration, or
+              community events. The focus is on removing unnecessary barriers
+              and offering a fast, secure, and reliable way to communicate
+              online. This has strong security.
+              <p className="pt-3">
+                We value open communication and continuous improvement. Users
+                are encouraged to share feedback, suggestions, or concerns,
+                helping us refine the system and deliver an even better
+                experience. For support or inquiries, our dedicated contact
+                channels ensure quick and helpful responses, making it easy to
+                stay connected with our team.
+              </p>
+            </p>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
             <img
               src="../public/image1.png"
-              alt="robot"
-              className="max-h-96 h-80 w-auto rounded-2xl shadow-2xl "
-            />
-          </div>
-          <div className="flex justify-center">
-            <img
-              src="../public/image2.png"
-              alt="robot"
-              className="max-h-96 h-80 w-auto rounded-2xl shadow-2xl"
+              alt="Chat Platform Illustration"
+              className="max-h-96 rounded-xl shadow-xl"
+              width={550}
             />
           </div>
         </div>

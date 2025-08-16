@@ -81,7 +81,7 @@ app.post("/save", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ userName, email, password: hashedPassword });
     await user.save();
-    res.json({ message: "Account created successfully" });
+    res.json({ message: "Account Created you can login" });
   } catch (error) {
     console.error("Signup error:", error);
     res.status(500).json({ error: "Failed to save" });

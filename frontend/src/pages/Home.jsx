@@ -7,24 +7,31 @@ function Home() {
         {/* Text Content */}
         <div className="md:w-1/2 text-center md:text-left">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
-            The conversational AI assistant enhances the technology's
-            information base.
+            Simplifying Communication: Connect, Collaborate, and Chat Anytime,
+            Anywhere...
           </h1>
-          <p className="text-gray-600">
-            Intellesphere develops AI-based applications that help the people of
-            a self-improved find the answer to their queries from this data.
-            That can work as a SaaS or on-prem tool.
+          <p className="text-lg">
+            It enables real-time communication across multiple chats.Whether for
+            collaboration, social interaction, or events, the app ensures a
+            seamless experience powered by reliability and strong security.
           </p>
-          <b className="text-red-600 ">Start chat without registration...</b>
-          <div className="pt-4">
-            <Link to="/chat" className="bg-blue-600 text-white rounded-2xl py-2 px-20 hover:bg-blue-700 transition-colors cursor-pointer">
+          <b className="text-red-600">Start chat without registration...</b>
+          <div className="pt-5">
+            <Link
+              to="/chat"
+              className="bg-blue-600 text-white rounded-2xl py-2 px-32 font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+            >
               Start Chat...
             </Link>
           </div>
         </div>
         {/*image content*/}
         <div className="md:w-1/2 mt-6 md:mt-0 flex justify-center">
-          <img src="../public/home.png" alt="robot" className="max-h-96 rounded-2xl shadow-1xl h-96" />
+          <img
+            src="../public/home.png"
+            alt="image"
+            className="max-h-96 rounded-2xl shadow-1xl h-96"
+          />
         </div>
       </div>
     </div>
