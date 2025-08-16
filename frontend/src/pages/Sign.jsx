@@ -22,7 +22,7 @@ function Sign() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/signup",
+        "http://localhost:5000/api/auth/signup",
         form
       );
       alert(response.data.message);

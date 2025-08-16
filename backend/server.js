@@ -1,24 +1,51 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
+const express = require("express");
+const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
-const chatSocket = require("./socket/chatSocket");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-dotenv.config();
-connectDB();
+// Import Routes
+const authRoutes = require("./routes/authRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
+// Initialize App & Server
 const app = express();
 const server = http.createServer(app);
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-app.use("api/auth",require("./routes/authRoutes"));
+// ✅ Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/contact", contactRoutes);
 
-const io = new Server(server, { cors: { methods: ["GET", "POST"] } });
-chatSocket(io);
+// ✅ Socket.IO
+const io = new Server(server, {
+  cors: {
+    methods: ["GET", "POST"],
+  },
+});
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+io.on("connection", (user) => {
+  console.log("User connected:", user.id);
+
+  user.on("chatMessage", (msg) => {
+    console.log(`message from ${user.id}:`, msg);
+    io.emit("chatMessage", msg);
+  });
+
+  user.on("disconnect", () => {
+    console.log("User disconnected:", user.id);
+  });
+});
+
+// ✅ MongoDB Connection
+const connectDB = require("./config/db");
+connectDB();
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () =>
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
+);
