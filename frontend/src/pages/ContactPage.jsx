@@ -25,7 +25,7 @@ const submitForm = async () => {
   } 
 
   try{
-    const response = await axios.post("http://localhost:5000/contact",form);
+    const response = await axios.post("http://localhost:5000/api/contact",form);
     alert(response.data.message);
     setForm({name:"",email: "",phone:"", message:""});
   } catch(error) {

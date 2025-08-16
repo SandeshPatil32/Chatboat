@@ -8,7 +8,6 @@ function Footer() {
           <span className="text-2xl font-bold text-white tracking-tight md:text-3xl">
             ChatBoat
           </span>
-          <p className="text-sm text-gray-400">Conversational AI Assistant</p>
         </div>
         <div className="flex space-x-6">
           <a
