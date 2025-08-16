@@ -24,14 +24,14 @@ function About() {
               community events. The focus is on removing unnecessary barriers
               and offering a fast, secure, and reliable way to communicate
               online. This has strong security.
-              <p className="pt-3">
-                We value open communication and continuous improvement. Users
-                are encouraged to share feedback, suggestions, or concerns,
-                helping us refine the system and deliver an even better
-                experience. For support or inquiries, our dedicated contact
-                channels ensure quick and helpful responses, making it easy to
-                stay connected with our team.
-              </p>
+            </p>
+            <p className="pt-3">
+              We value open communication and continuous improvement. Users are
+              encouraged to share feedback, suggestions, or concerns, helping us
+              refine the system and deliver an even better experience. For
+              support or inquiries, our dedicated contact channels ensure quick
+              and helpful responses, making it easy to stay connected with our
+              team.
             </p>
           </div>
           <div className="md:w-1/2 flex justify-center">

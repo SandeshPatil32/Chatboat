@@ -22,7 +22,7 @@ function Sign() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/save",
+        "http://localhost:5000/signup",
         form
       );
       alert(response.data.message);

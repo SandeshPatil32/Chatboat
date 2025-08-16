@@ -74,7 +74,7 @@ app.post("/contact", async (req, res) => {
 
 
 // ✅ Signup Route
-app.post("/save", async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { userName, email, password } = req.body;
 
   try {
