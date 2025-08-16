@@ -2,12 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
-const mongoose = require("mongoose");
 require("dotenv").config();
 
-// Import Routes
+// Import Files
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const connectDB = require("./config/db");
+const chatSocket = require("./socket/chatSocket");
 
 // Initialize App & Server
 const app = express();
@@ -28,21 +29,10 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (user) => {
-  console.log("User connected:", user.id);
-
-  user.on("chatMessage", (msg) => {
-    console.log(`message from ${user.id}:`, msg);
-    io.emit("chatMessage", msg);
-  });
-
-  user.on("disconnect", () => {
-    console.log("User disconnected:", user.id);
-  });
-});
+// Pass socket to handler
+chatSocket(io);
 
 // ✅ MongoDB Connection
-const connectDB = require("./config/db");
 connectDB();
 
 const PORT = process.env.PORT || 5000;
